@@ -1,12 +1,21 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
+import React from 'react';
+// import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+
+import { store } from './state/store';
+import { App } from './app';
+
+
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('app')
   </React.StrictMode>,
   document.getElementById('root')
 );
