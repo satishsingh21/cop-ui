@@ -7,16 +7,6 @@ import { HomePage } from '../components/homePage';
 import { RegisterPage } from '../components/registerPage';
 
 function App() {
-    // const alert = useSelector(state => state.alert);
-    // const dispatch = useDispatch();
-
-    useEffect(() => {
-        history.listen((location, action) => {
-            // clear alert on location change
-            // dispatch(alertActions.clear());
-        });
-    }, []);
-
     return (
         <div className="jumbotron">
             <div className="container">
@@ -24,7 +14,7 @@ function App() {
                     {/* {alert.message &&
                         <div className={`alert ${alert.type}`}>{alert.message}</div>
                     } */}
-                    <Router >
+                    <Router history={history}>
                         <Switch>
                             <Route exact path="/" component={HomePage} />
                             <Route path="/register" component={RegisterPage} />

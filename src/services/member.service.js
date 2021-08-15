@@ -1,6 +1,6 @@
 
 // import { authHeader } from '../_helpers';
-const config = { apiUrl: 'http://localhost:3000/' };
+const config = { apiUrl: 'http://localhost:3000' };
 
 export const memberService = {
     register,
