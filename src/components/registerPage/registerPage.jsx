@@ -5,11 +5,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { memberActions } from '../../state/actions';
 
 function RegisterPage() {
-    const [user, setUser] = useState({
-        firstName: '',
-        lastName: '',
-        username: '',
-        password: ''
+    const [member, setMember] = useState({
+        _id: '',
+        name: '',
+        email: '',
+        copName: '',
+        designation: '',
+        totalExperience: '',
+        totalPoints: '',
+        updatedBy: '',
+        createdBy: '',
+        caretedAt: '',
+        updatedAt: ''
     });
     const [submitted, setSubmitted] = useState(false);
 
@@ -18,15 +25,15 @@ function RegisterPage() {
 
     function handleChange(e) {
         const { name, value } = e.target;
-        setUser(user => ({ ...user, [name]: value }));
+        setMember(member => ({ ...member, [name]: value }));
     }
 
     function handleSubmit(e) {
         e.preventDefault();
 
         setSubmitted(true);
-        if (user.firstName && user.lastName && user.username && user.password) {
-            dispatch(memberActions.register(user));
+        if (member) {
+            dispatch(memberActions.register(member));
         }
     }
 
@@ -36,30 +43,58 @@ function RegisterPage() {
             <form name="form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>First Name</label>
-                    <input type="text" name="firstName" value={user.firstName} onChange={handleChange} className={'form-control' + (submitted && !user.firstName ? ' is-invalid' : '')} />
-                    {submitted && !user.firstName &&
+                    <input type="text" name="name" value={member.name} onChange={handleChange} className={'form-control' + (submitted && !member.name ? ' is-invalid' : '')} />
+                    {submitted && !member.name &&
                         <div className="invalid-feedback">First Name is required</div>
                     }
                 </div>
                 <div className="form-group">
-                    <label>Last Name</label>
-                    <input type="text" name="lastName" value={user.lastName} onChange={handleChange} className={'form-control' + (submitted && !user.lastName ? ' is-invalid' : '')} />
-                    {submitted && !user.lastName &&
-                        <div className="invalid-feedback">Last Name is required</div>
+                    <label>Email</label>
+                    <input type="text" name="email" value={member.email} onChange={handleChange} className={'form-control' + (submitted && !member.email ? ' is-invalid' : '')} />
+                    {submitted && !member.email &&
+                        <div className="invalid-feedback">Email is required</div>
                     }
                 </div>
                 <div className="form-group">
-                    <label>Username</label>
-                    <input type="text" name="username" value={user.username} onChange={handleChange} className={'form-control' + (submitted && !user.username ? ' is-invalid' : '')} />
-                    {submitted && !user.username &&
-                        <div className="invalid-feedback">Username is required</div>
+                    <label>COP Name</label>
+                    <input type="text" name="copName" value={member.copName} onChange={handleChange} className={'form-control' + (submitted && !member.copName ? ' is-invalid' : '')} />
+                    {submitted && !member.copName &&
+                        <div className="invalid-feedback">COP Name is required</div>
                     }
                 </div>
                 <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" value={user.password} onChange={handleChange} className={'form-control' + (submitted && !user.password ? ' is-invalid' : '')} />
-                    {submitted && !user.password &&
-                        <div className="invalid-feedback">Password is required</div>
+                    <label>Designation</label>
+                    <input type="text" name="designation" value={member.designation} onChange={handleChange} className={'form-control' + (submitted && !member.designation ? ' is-invalid' : '')} />
+                    {submitted && !member.designation &&
+                        <div className="invalid-feedback">Designation is required</div>
+                    }
+                </div>
+                <div className="form-group">
+                    <label>Created by</label>
+                    <input type="text" name="createdBy" value={member.createdBy} onChange={handleChange} className={'form-control' + (submitted && !member.createdBy ? ' is-invalid' : '')} />
+                    {submitted && !member.createdBy &&
+                        <div className="invalid-feedback">Created by is required</div>
+                    }
+                </div>
+                <div className="form-group">
+                    <label>Updated by</label>
+                    <input type="text" name="UpdatedBy" value={member.UpdatedBy} onChange={handleChange} className={'form-control' + (submitted && !member.UpdatedBy ? ' is-invalid' : '')} />
+                    {submitted && !member.UpdatedBy &&
+                        <div className="invalid-feedback">Updated by is required</div>
+                    }
+                </div>
+                <div className="form-group">
+                    <label>Total Experience</label>
+                    <input type="text" name="totalExperience" value={member.totalExperience} onChange={handleChange} className={'form-control' + (submitted && !member.totalExperience ? ' is-invalid' : '')} />
+                    {submitted && !member.totalExperience &&
+                        <div className="invalid-feedback">Total Experience is required</div>
+                    }
+                </div>
+                <div className="form-group">
+                    <label>Total Point</label>
+                    <input type="text" name="totalPoints" value={member.totalPoints} onChange={handleChange} className={'form-control' + (submitted && !member.totalPoints ? ' is-invalid' : '')} />
+                    {submitted && !member.totalPoints &&
+                        <div className="invalid-feedback">Total Point is required</div>
                     }
                 </div>
                 <div className="form-group">

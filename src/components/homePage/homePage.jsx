@@ -15,11 +15,9 @@ function HomePage() {
         <div className="col-lg-8 offset-lg-2">
             <h1>Hi Guest!</h1>
             <h3>All registered members:</h3>
-            {/* {members.loading && <em>Loading members...</em>}
-            {members.error && <span className="text-danger">ERROR: {members.error}</span>} */}
             {members.items &&
                 <ul>
-                    {members.items.map((member, index) =>
+                    {members.items.map((member) =>
                         <li key={member._id}>
                             {member.name}
                         </li>

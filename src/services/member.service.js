@@ -1,5 +1,3 @@
-
-// import { authHeader } from '../_helpers';
 const config = { apiUrl: 'http://localhost:3000' };
 
 export const memberService = {
@@ -34,7 +32,7 @@ function register(member) {
         body: JSON.stringify(member)
     };
 
-    return fetch(`${config.apiUrl}/members/register`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/members`, requestOptions).then(handleResponse);
 }
 
 function update(member) {
@@ -52,8 +50,6 @@ function handleResponse(response) {
         const data = text && JSON.parse(text);
         if (!response.ok) {
             if (response.status === 401) {
-                // auto logout if 401 response returned from api
-                // logout();
                 Location.reload(true);
             }
 
