@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { userActions } from '../../state/actions';
+import { memberActions } from '../../state/actions';
 
 function RegisterPage() {
     const [user, setUser] = useState({
@@ -12,13 +12,9 @@ function RegisterPage() {
         password: ''
     });
     const [submitted, setSubmitted] = useState(false);
+
     const registering = useSelector(state => state.registration.registering);
     const dispatch = useDispatch();
-
-    // reset login status
-    useEffect(() => {
-        dispatch(userActions.logout());
-    }, []);
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -30,7 +26,7 @@ function RegisterPage() {
 
         setSubmitted(true);
         if (user.firstName && user.lastName && user.username && user.password) {
-            dispatch(userActions.register(user));
+            dispatch(memberActions.register(user));
         }
     }
 
@@ -71,7 +67,6 @@ function RegisterPage() {
                         {registering && <span className="spinner-border spinner-border-sm mr-1"></span>}
                         Register
                     </button>
-                    <Link to="/login" className="btn btn-link">Cancel</Link>
                 </div>
             </form>
         </div>
