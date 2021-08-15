@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { memberActions } from '../../state/actions';
 
 function HomePage() {
-    const users = useSelector(state => state.users);
+    const members = useSelector(state => state.members);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,14 +14,14 @@ function HomePage() {
     return (
         <div className="col-lg-8 offset-lg-2">
             <h1>Hi Guest!</h1>
-            <h3>All registered users:</h3>
-            {users.loading && <em>Loading users...</em>}
-            {users.error && <span className="text-danger">ERROR: {users.error}</span>}
-            {users.items &&
+            <h3>All registered members:</h3>
+            {members.loading && <em>Loading members...</em>}
+            {members.error && <span className="text-danger">ERROR: {members.error}</span>}
+            {members.items &&
                 <ul>
-                    {users.items.map((user, index) =>
-                        <li key={user.id}>
-                            {user.firstName + ' ' + user.lastName}
+                    {members.items.map((member, index) =>
+                        <li key={member.id}>
+                            {member.firstName + ' ' + member.lastName}
                         </li>
                     )}
                 </ul>

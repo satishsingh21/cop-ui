@@ -1,6 +1,6 @@
 import { memberConstants } from '../../constants';
 import { memberService } from '../../services';
-import { alertActions } from '.';
+// import { alertActions } from '.';
 // import { history } from '../helpers';
 
 export const memberActions = {
@@ -44,11 +44,11 @@ function register(member) {
                 member => { 
                     dispatch(success());
                     // history.push('/login');
-                    dispatch(alertActions.success('Registration successful'));
+                    // dispatch(alertActions.success('Registration successful'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
+                    // dispatch(alertActions.error(error.toString()));
                 }
             );
     };
