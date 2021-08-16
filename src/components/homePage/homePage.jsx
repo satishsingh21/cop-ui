@@ -41,7 +41,6 @@ function HomePage() {
 
     return (
         <div className="col-lg-12">
-            <h1>Hi Guest!</h1>
             <h3>All registered members:</h3>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
