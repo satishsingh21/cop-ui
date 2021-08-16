@@ -14,9 +14,7 @@ function RegisterPage() {
         totalExperience: '',
         totalPoints: '',
         updatedBy: '',
-        createdBy: '',
-        caretedAt: '',
-        updatedAt: ''
+        createdBy: ''
     });
     const [submitted, setSubmitted] = useState(false);
 
@@ -42,10 +40,17 @@ function RegisterPage() {
             <h2>Register</h2>
             <form name="form" onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label>First Name</label>
+                    <label>Id</label>
+                    <input type="text" name="_id" value={member._id} onChange={handleChange} className={'form-control' + (submitted && !member._id ? ' is-invalid' : '')} />
+                    {submitted && !member._id &&
+                        <div className="invalid-feedback">Id is required</div>
+                    }
+                </div>
+                <div className="form-group">
+                    <label>Name</label>
                     <input type="text" name="name" value={member.name} onChange={handleChange} className={'form-control' + (submitted && !member.name ? ' is-invalid' : '')} />
                     {submitted && !member.name &&
-                        <div className="invalid-feedback">First Name is required</div>
+                        <div className="invalid-feedback">Name is required</div>
                     }
                 </div>
                 <div className="form-group">
@@ -57,7 +62,11 @@ function RegisterPage() {
                 </div>
                 <div className="form-group">
                     <label>COP Name</label>
-                    <input type="text" name="copName" value={member.copName} onChange={handleChange} className={'form-control' + (submitted && !member.copName ? ' is-invalid' : '')} />
+                    <select value={member.copName} onChange={handleChange} 
+                            className={'form-control' + (submitted && !member.copName ? ' is-invalid' : '')}>
+                        <option value="DBCOP">DBCOP</option>
+                        <option value="JSCOP">JSCOP</option>
+                    </select>
                     {submitted && !member.copName &&
                         <div className="invalid-feedback">COP Name is required</div>
                     }
@@ -78,21 +87,21 @@ function RegisterPage() {
                 </div>
                 <div className="form-group">
                     <label>Updated by</label>
-                    <input type="text" name="UpdatedBy" value={member.UpdatedBy} onChange={handleChange} className={'form-control' + (submitted && !member.UpdatedBy ? ' is-invalid' : '')} />
-                    {submitted && !member.UpdatedBy &&
+                    <input type="text" name="updatedBy" value={member.updatedBy} onChange={handleChange} className={'form-control' + (submitted && !member.updatedBy ? ' is-invalid' : '')} />
+                    {submitted && !member.updatedBy &&
                         <div className="invalid-feedback">Updated by is required</div>
                     }
                 </div>
                 <div className="form-group">
                     <label>Total Experience</label>
-                    <input type="text" name="totalExperience" value={member.totalExperience} onChange={handleChange} className={'form-control' + (submitted && !member.totalExperience ? ' is-invalid' : '')} />
+                    <input type="text" pattern="[0-9]*" name="totalExperience" value={member.totalExperience} onChange={handleChange} className={'form-control' + (submitted && !member.totalExperience ? ' is-invalid' : '')} />
                     {submitted && !member.totalExperience &&
                         <div className="invalid-feedback">Total Experience is required</div>
                     }
                 </div>
                 <div className="form-group">
                     <label>Total Point</label>
-                    <input type="text" name="totalPoints" value={member.totalPoints} onChange={handleChange} className={'form-control' + (submitted && !member.totalPoints ? ' is-invalid' : '')} />
+                    <input type="text" pattern="[0-9]*" name="totalPoints" value={member.totalPoints} onChange={handleChange} className={'form-control' + (submitted && !member.totalPoints ? ' is-invalid' : '')} />
                     {submitted && !member.totalPoints &&
                         <div className="invalid-feedback">Total Point is required</div>
                     }
