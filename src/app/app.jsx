@@ -9,7 +9,7 @@ function App() {
     return (
         <div className="jumbotron">
             <div className="container">
-                <div className="col-md-8 offset-md-2">
+                <div className="col-lg-12">
                     <Router history={history}>
                         <Switch>
                             <Route exact path="/" component={HomePage} />
