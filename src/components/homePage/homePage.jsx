@@ -48,9 +48,6 @@ function HomePage() {
                 <TableBody>
                 {members.items && members.items.map((row) => (
                     <TableRow key={row._id}>
-                    <TableCell component="th" scope="row">
-                        {row._id}
-                    </TableCell>
                     <TableCell align="right">{row._id}</TableCell>
                     <TableCell align="right">{row.name}</TableCell>
                     <TableCell align="right">{row.email}</TableCell>
