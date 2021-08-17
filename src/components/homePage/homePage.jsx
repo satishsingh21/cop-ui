@@ -8,14 +8,20 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 import { memberActions } from '../../state/actions';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     table: {
       minWidth: 650,
     },
-});
+    root: {
+        '& > *': {
+          margin: theme.spacing(1),
+        },
+    },
+}));
 
 function HomePage() {
     const members = useSelector(state => state.members);
@@ -40,23 +46,24 @@ function HomePage() {
                     <TableCell align="right">Designation&nbsp;</TableCell>
                     <TableCell align="right">TotalPoints</TableCell>
                     <TableCell align="right">COP Name&nbsp;</TableCell>
-                    <TableCell align="right">CreatedBy&nbsp;</TableCell>
-                    <TableCell align="right">UpdatedBy&nbsp;</TableCell>
-                    <TableCell align="right">Total Experience&nbsp;</TableCell>
+                    <TableCell align="right">Action&nbsp;</TableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
                 {members.items && members.items.map((row) => (
                     <TableRow key={row._id}>
-                    <TableCell align="right">{row._id}</TableCell>
-                    <TableCell align="right">{row.name}</TableCell>
-                    <TableCell align="right">{row.email}</TableCell>
-                    <TableCell align="right">{row.designation}</TableCell>
-                    <TableCell align="right">{row.totalPoints}</TableCell>
-                    <TableCell align="right">{row.copName}</TableCell>
-                    <TableCell align="right">{row._createdBy}</TableCell>
-                    <TableCell align="right">{row._updatedBy}</TableCell>
-                    <TableCell align="right">{row.totalExperience}</TableCell>
+                        <TableCell align="right">{row._id}</TableCell>
+                        <TableCell align="right">{row.name}</TableCell>
+                        <TableCell align="right">{row.email}</TableCell>
+                        <TableCell align="right">{row.designation}</TableCell>
+                        <TableCell align="right">{row.totalPoints}</TableCell>
+                        <TableCell align="right">{row.copName}</TableCell>
+                        <TableCell align="right">
+                            <div className={classes.root}>
+                                <Button variant="contained">Detail</Button> 
+                                <Button variant="contained">Edit</Button>
+                            </div>
+                        </TableCell>
                     </TableRow>
                 ))}
                 </TableBody>
