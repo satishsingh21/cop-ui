@@ -11,8 +11,8 @@ function RegisterPage() {
         email: '',
         copName: '',
         designation: '',
-        totalExperience: 0,
-        totalPoints: 0,
+        totalExperience: '',
+        totalPoints: '',
         // updatedBy: '',
         createdBy: ''
     });
@@ -72,7 +72,7 @@ function RegisterPage() {
                 </div>
                 <div className="form-group">
                     <label>COP Name</label>
-                    <select value={member.copName} onChange={handleChange} 
+                    <select value={member.copName} onChange={handleChange} name="copName"
                             className={'form-control' + (submitted && !member.copName ? ' is-invalid' : '')}>
                         {
                             copNames.map(item => (
@@ -86,7 +86,7 @@ function RegisterPage() {
                 </div>
                 <div className="form-group">
                     <label>Designation</label>
-                    <select value={member.designation} onChange={handleChange} 
+                    <select onChange={handleChange} value={member.designation} name="designation"
                             className={'form-control' + (submitted && !member.designation ? ' is-invalid' : '')}>
                     {
                         designationNames.map(item => (
