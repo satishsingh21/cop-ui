@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -28,7 +29,7 @@ function HomePage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(memberActions.getAll());
+        dispatch(memberActions.getAllMember());
     }, [dispatch]);
 
     const classes = useStyles();
@@ -36,6 +37,7 @@ function HomePage() {
     return (
         <div className="col-lg-12">
             <h3>All registered members:</h3>
+            <Link to="/register" className="btn btn-primary">Add new member</Link>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                 <TableHead>
@@ -60,7 +62,10 @@ function HomePage() {
                         <TableCell align="right">{row.copName}</TableCell>
                         <TableCell align="right">
                             <div className={classes.root}>
-                                <Button variant="contained">Detail</Button> 
+                                <Button variant="contained">
+                                    <Link to={`/member/${row._id}`}
+                                        >Detail</Link>
+                                    </Button> 
                                 <Button variant="contained">Edit</Button>
                             </div>
                         </TableCell>
@@ -69,15 +74,6 @@ function HomePage() {
                 </TableBody>
             </Table>
             </TableContainer>
-            {/* {members.items &&
-                <ul>
-                    {members.items.map((member) =>
-                        <li key={member._id}>
-                            {member.name}
-                        </li>
-                    )}
-                </ul>
-            } */}
         </div>
     );
 }

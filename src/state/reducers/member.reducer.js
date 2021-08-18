@@ -1,6 +1,6 @@
 import { memberConstants } from '../../constants';
 
-export function members(state = {}, action) {
+export function member(state = {}, action) {
     switch (action.type) {
         case memberConstants.GETALL_REQUEST:
             return {
@@ -8,7 +8,7 @@ export function members(state = {}, action) {
             };
         case memberConstants.GETALL_SUCCESS:
             return {
-                items: action.members
+                items: action.member
             };
         case memberConstants.GETALL_FAILURE:
             return {

@@ -2,12 +2,12 @@ const config = { apiUrl: 'http://localhost:3000' };
 
 export const memberService = {
     register,
-    getAll,
-    getById,
+    getAllMember,
+    getMemberById,
     update
 };
 
-function getAll() {
+function getAllMember() {
     const requestOptions = {
         method: 'GET',
         // headers: authHeader()
@@ -16,7 +16,7 @@ function getAll() {
     return fetch(`${config.apiUrl}/members`, requestOptions).then(handleResponse);
 }
 
-function getById(id) {
+function getMemberById(id) {
     const requestOptions = {
         method: 'GET',
         // headers: authHeader()
