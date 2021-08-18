@@ -44,18 +44,18 @@ function getAllMember() {
     function failure(error) { return { type: memberConstants.GETALL_FAILURE, error } }
 }
 
-function getMemberById() {
+function getMemberById(id) {
     return dispatch => {
         dispatch(request());
 
-        memberService.getMemberById()
+        memberService.getMemberById(id)
             .then(
                 member => dispatch(success(member)),
                 error => dispatch(failure(error.toString()))
             );
     };
 
-    function request() { return { type: memberConstants.GETALL_REQUEST } }
-    function success(members) { return { type: memberConstants.GETALL_SUCCESS, members } }
-    function failure(error) { return { type: memberConstants.GETALL_FAILURE, error } }
+    function request() { return { type: memberConstants.GET_REQUEST } }
+    function success(member) { return { type: memberConstants.GET_SUCCESS, member } }
+    function failure(error) { return { type: memberConstants.GET_FAILURE, error } }
 }
