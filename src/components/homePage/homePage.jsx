@@ -55,17 +55,16 @@ function HomePage() {
                 {members.items && members.items.map((row) => (
                     <TableRow key={row._id}>
                         <TableCell align="right">{row._id}</TableCell>
-                        <TableCell align="right">{row.name}</TableCell>
+                        <TableCell align="right">
+                            <Link to={`/member/${row._id}`}>Detail{row.name}</Link>
+                        </TableCell>
                         <TableCell align="right">{row.email}</TableCell>
                         <TableCell align="right">{row.designation}</TableCell>
                         <TableCell align="right">{row.totalPoints}</TableCell>
                         <TableCell align="right">{row.copName}</TableCell>
                         <TableCell align="right">
                             <div className={classes.root}>
-                                <Button variant="contained">
-                                    <Link to={`/member/${row._id}`}
-                                        >Detail</Link>
-                                    </Button> 
+                                
                                 <Button variant="contained">Edit</Button>
                             </div>
                         </TableCell>
