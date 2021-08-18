@@ -7,7 +7,6 @@ export const memberActions = {
     getMemberById,
 };
 
-
 function register(member) {
     return dispatch => {
         dispatch(request(member));

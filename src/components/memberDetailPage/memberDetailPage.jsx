@@ -34,4 +34,3 @@ function MemberDetailPage() {
 }
 
 export { MemberDetailPage };
-
