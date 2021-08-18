@@ -14,9 +14,9 @@ function App() {
                     <Router history={history}>
                         <Switch>
                             <Route exact path="/" component={HomePage} />
-                            <Route path="/register" component={RegisterPage} />
+                            <Route exact path="/member/register" component={RegisterPage} />
                             <Route exact path="/member/:id" component={MemberDetailPage} />
-                            <Route path="/update" component={RegisterPage} />
+                            <Route exact path="member/update/:id" component={RegisterPage} />
                             <Redirect from="*" to="/" />
                         </Switch>
                     </Router>

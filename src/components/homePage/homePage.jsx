@@ -36,8 +36,8 @@ function HomePage() {
 
     return (
         <div className="col-lg-12">
-            <h3>All registered members:</h3>
-            <Link to="/register" className="btn btn-primary">Add new member</Link>
+            <div>All registered members:
+            <span><Link to="/member/register" style={{float: "right"}}  className="btn btn-primary">Add new member</Link></span></div>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                 <TableHead>
@@ -46,7 +46,6 @@ function HomePage() {
                     <TableCell align="right">Name&nbsp;</TableCell>
                     <TableCell align="right">Email&nbsp;</TableCell>
                     <TableCell align="right">Designation&nbsp;</TableCell>
-                    <TableCell align="right">TotalPoints</TableCell>
                     <TableCell align="right">COP Name&nbsp;</TableCell>
                     <TableCell align="right">Action&nbsp;</TableCell>
                 </TableRow>
@@ -60,7 +59,6 @@ function HomePage() {
                         </TableCell>
                         <TableCell align="right">{row.email}</TableCell>
                         <TableCell align="right">{row.designation}</TableCell>
-                        <TableCell align="right">{row.totalPoints}</TableCell>
                         <TableCell align="right">{row.copName}</TableCell>
                         <TableCell align="right">
                             <div className={classes.root}>

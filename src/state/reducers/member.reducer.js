@@ -8,7 +8,7 @@ export function member(state = {}, action) {
             };
         case memberConstants.GET_SUCCESS:
             return {
-                items: action.member
+                item: action.member
             };
         case memberConstants.GET_FAILURE:
             return {
