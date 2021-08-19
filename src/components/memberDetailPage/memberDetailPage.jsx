@@ -11,7 +11,7 @@ function MemberDetailPage() {
     
     useEffect(() => {
         dispatch(memberActions.getMemberById(id));
-    }, []);
+    }, [dispatch, id]);
 
     return (
         <div className="col-lg-12">
