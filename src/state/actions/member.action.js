@@ -13,7 +13,7 @@ function register(member) {
 
         memberService.register(member)
             .then(
-                member => { 
+                () => { 
                     dispatch(success());
                 },
                 error => {
