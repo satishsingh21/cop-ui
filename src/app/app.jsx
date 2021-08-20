@@ -4,6 +4,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { history } from '../helpers/history';
 import { HomePage } from '../components/homePage';
 import { RegisterPage } from '../components/registerPage';
+import { MemberDetailPage } from '../components/memberDetailPage';
 
 function App() {
     return (
@@ -13,7 +14,9 @@ function App() {
                     <Router history={history}>
                         <Switch>
                             <Route exact path="/" component={HomePage} />
-                            <Route path="/register" component={RegisterPage} />
+                            <Route exact path="/member/register" component={RegisterPage} />
+                            <Route exact path="/member/:id" component={MemberDetailPage} />
+                            <Route exact path="member/update/:id" component={RegisterPage} />
                             <Redirect from="*" to="/" />
                         </Switch>
                     </Router>

@@ -3,9 +3,9 @@ import { memberService } from '../../services';
 
 export const memberActions = {
     register,
-    getAll
+    getAllMember,
+    getMemberById,
 };
-
 
 function register(member) {
     return dispatch => {
@@ -27,11 +27,11 @@ function register(member) {
     function failure(error) { return { type: memberConstants.REGISTER_FAILURE, error } }
 }
 
-function getAll() {
+function getAllMember() {
     return dispatch => {
         dispatch(request());
 
-        memberService.getAll()
+        memberService.getAllMember()
             .then(
                 members => dispatch(success(members)),
                 error => dispatch(failure(error.toString()))
@@ -41,4 +41,20 @@ function getAll() {
     function request() { return { type: memberConstants.GETALL_REQUEST } }
     function success(members) { return { type: memberConstants.GETALL_SUCCESS, members } }
     function failure(error) { return { type: memberConstants.GETALL_FAILURE, error } }
+}
+
+function getMemberById(id) {
+    return dispatch => {
+        dispatch(request());
+
+        memberService.getMemberById(id)
+            .then(
+                member => dispatch(success(member)),
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request() { return { type: memberConstants.GET_REQUEST } }
+    function success(member) { return { type: memberConstants.GET_SUCCESS, member } }
+    function failure(error) { return { type: memberConstants.GET_FAILURE, error } }
 }

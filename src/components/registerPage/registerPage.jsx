@@ -13,17 +13,27 @@ function RegisterPage() {
         designation: '',
         totalExperience: '',
         totalPoints: '',
-        updatedBy: '',
+        // updatedBy: '',
         createdBy: ''
     });
+
+    const [copNames] = React.useState([
+        { label: "DBCOP", value: "DBCOP" },
+        { label: "JSCOP", value: "JSCOP" },
+    ]);
+
+    const [designationNames] = React.useState([
+        { label: "Senior Software Engineer", value: "Senior Software Engineer" },
+        { label: "Software Engineer", value: "Software Engineer" },
+    ]);
+
     const [submitted, setSubmitted] = useState(false);
 
     const registering = useSelector(state => state.registration.registering);
     const dispatch = useDispatch();
 
     function handleChange(e) {
-        const { name, value } = e.target;
-        setMember(member => ({ ...member, [name]: value }));
+        setMember(member => ({ ...member, [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value }));
     }
 
     function handleSubmit(e) {
@@ -40,7 +50,7 @@ function RegisterPage() {
             <h2>Register</h2>
             <form name="form" onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label>Id</label>
+                    <label>Employee Id</label>
                     <input type="text" name="_id" value={member._id} onChange={handleChange} className={'form-control' + (submitted && !member._id ? ' is-invalid' : '')} />
                     {submitted && !member._id &&
                         <div className="invalid-feedback">Id is required</div>
@@ -62,10 +72,13 @@ function RegisterPage() {
                 </div>
                 <div className="form-group">
                     <label>COP Name</label>
-                    <select value={member.copName} onChange={handleChange} 
+                    <select value={member.copName} onChange={handleChange} name="copName"
                             className={'form-control' + (submitted && !member.copName ? ' is-invalid' : '')}>
-                        <option value="DBCOP">DBCOP</option>
-                        <option value="JSCOP">JSCOP</option>
+                        {
+                            copNames.map(item => (
+                                <option key={item.value} value={item.value}> {item.label} </option>
+                            ))
+                        }
                     </select>
                     {submitted && !member.copName &&
                         <div className="invalid-feedback">COP Name is required</div>
@@ -73,7 +86,14 @@ function RegisterPage() {
                 </div>
                 <div className="form-group">
                     <label>Designation</label>
-                    <input type="text" name="designation" value={member.designation} onChange={handleChange} className={'form-control' + (submitted && !member.designation ? ' is-invalid' : '')} />
+                    <select onChange={handleChange} value={member.designation} name="designation"
+                            className={'form-control' + (submitted && !member.designation ? ' is-invalid' : '')}>
+                    {
+                        designationNames.map(item => (
+                            <option key={item.value} value={item.value}> {item.label}</option>
+                        ))
+                    }
+                    </select>
                     {submitted && !member.designation &&
                         <div className="invalid-feedback">Designation is required</div>
                     }
@@ -85,23 +105,23 @@ function RegisterPage() {
                         <div className="invalid-feedback">Created by is required</div>
                     }
                 </div>
-                <div className="form-group">
+                {/* <div className="form-group">
                     <label>Updated by</label>
                     <input type="text" name="updatedBy" value={member.updatedBy} onChange={handleChange} className={'form-control' + (submitted && !member.updatedBy ? ' is-invalid' : '')} />
                     {submitted && !member.updatedBy &&
                         <div className="invalid-feedback">Updated by is required</div>
                     }
-                </div>
+                </div> */}
                 <div className="form-group">
                     <label>Total Experience</label>
-                    <input type="text" pattern="[0-9]*" name="totalExperience" value={member.totalExperience} onChange={handleChange} className={'form-control' + (submitted && !member.totalExperience ? ' is-invalid' : '')} />
+                    <input type="number" name="totalExperience" value={member.totalExperience} onChange={handleChange} className={'form-control' + (submitted && !member.totalExperience ? ' is-invalid' : '')} />
                     {submitted && !member.totalExperience &&
                         <div className="invalid-feedback">Total Experience is required</div>
                     }
                 </div>
                 <div className="form-group">
                     <label>Total Point</label>
-                    <input type="text" pattern="[0-9]*" name="totalPoints" value={member.totalPoints} onChange={handleChange} className={'form-control' + (submitted && !member.totalPoints ? ' is-invalid' : '')} />
+                    <input type="number" name="totalPoints" value={member.totalPoints} onChange={handleChange} className={'form-control' + (submitted && !member.totalPoints ? ' is-invalid' : '')} />
                     {submitted && !member.totalPoints &&
                         <div className="invalid-feedback">Total Point is required</div>
                     }
@@ -109,7 +129,7 @@ function RegisterPage() {
                 <div className="form-group">
                     <button className="btn btn-primary">
                         {registering && <span className="spinner-border spinner-border-sm mr-1"></span>}
-                        Register
+                        Submit
                     </button>
                 </div>
             </form>

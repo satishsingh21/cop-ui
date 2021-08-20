@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,28 +9,35 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 import { memberActions } from '../../state/actions';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     table: {
       minWidth: 650,
     },
-});
+    root: {
+        '& > *': {
+          margin: theme.spacing(1),
+        },
+    },
+}));
 
 function HomePage() {
     const members = useSelector(state => state.members);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(memberActions.getAll());
+        dispatch(memberActions.getAllMember());
     }, [dispatch]);
 
     const classes = useStyles();
 
     return (
         <div className="col-lg-12">
-            <h3>All registered members:</h3>
+            <div>All registered members:
+            <span><Link to="/member/register" style={{float: "right"}}  className="btn btn-primary">Add new member</Link></span></div>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                 <TableHead>
@@ -38,42 +46,31 @@ function HomePage() {
                     <TableCell align="right">Name&nbsp;</TableCell>
                     <TableCell align="right">Email&nbsp;</TableCell>
                     <TableCell align="right">Designation&nbsp;</TableCell>
-                    <TableCell align="right">TotalPoints</TableCell>
                     <TableCell align="right">COP Name&nbsp;</TableCell>
-                    <TableCell align="right">CreatedBy&nbsp;</TableCell>
-                    <TableCell align="right">UpdatedBy&nbsp;</TableCell>
-                    <TableCell align="right">Total Experience&nbsp;</TableCell>
+                    <TableCell align="right">Action&nbsp;</TableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
                 {members.items && members.items.map((row) => (
                     <TableRow key={row._id}>
-                    <TableCell component="th" scope="row">
-                        {row._id}
-                    </TableCell>
-                    <TableCell align="right">{row._id}</TableCell>
-                    <TableCell align="right">{row.name}</TableCell>
-                    <TableCell align="right">{row.email}</TableCell>
-                    <TableCell align="right">{row.designation}</TableCell>
-                    <TableCell align="right">{row.totalPoints}</TableCell>
-                    <TableCell align="right">{row.copName}</TableCell>
-                    <TableCell align="right">{row._createdBy}</TableCell>
-                    <TableCell align="right">{row._updatedBy}</TableCell>
-                    <TableCell align="right">{row.totalExperience}</TableCell>
+                        <TableCell align="right">{row._id}</TableCell>
+                        <TableCell align="right">
+                            <Link to={`/member/${row._id}`}>Detail{row.name}</Link>
+                        </TableCell>
+                        <TableCell align="right">{row.email}</TableCell>
+                        <TableCell align="right">{row.designation}</TableCell>
+                        <TableCell align="right">{row.copName}</TableCell>
+                        <TableCell align="right">
+                            <div className={classes.root}>
+                                
+                                <Button variant="contained">Edit</Button>
+                            </div>
+                        </TableCell>
                     </TableRow>
                 ))}
                 </TableBody>
             </Table>
             </TableContainer>
-            {/* {members.items &&
-                <ul>
-                    {members.items.map((member) =>
-                        <li key={member._id}>
-                            {member.name}
-                        </li>
-                    )}
-                </ul>
-            } */}
         </div>
     );
 }
