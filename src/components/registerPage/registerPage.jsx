@@ -46,7 +46,9 @@ function RegisterPage() {
         e.preventDefault();
 
         setSubmitted(true);
-        if (member) {
+        if (member && !isAddMode) {
+            dispatch(memberActions.updateMemberById(member));
+        } else {
             dispatch(memberActions.register(member));
         }
     }

@@ -4,7 +4,7 @@ export const memberService = {
     register,
     getAllMember,
     getMemberById,
-    update
+    updateMemberById
 };
 
 function getAllMember() {
@@ -35,14 +35,14 @@ function register(member) {
     return fetch(`${config.apiUrl}/members`, requestOptions).then(handleResponse);
 }
 
-function update(member) {
+function updateMemberById(member) {
     const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(member)
     };
 
-    return fetch(`${config.apiUrl}/members/${member.id}`, requestOptions).then(handleResponse);;
+    return fetch(`${config.apiUrl}/members/${member._id}`, requestOptions).then(handleResponse);;
 }
 
 function handleResponse(response) {
