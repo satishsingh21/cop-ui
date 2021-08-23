@@ -62,7 +62,7 @@ function HomePage() {
                         <TableCell align="right">{row.copName}</TableCell>
                         <TableCell align="right">
                             <div className={classes.root}>
-                                <Button variant="contained"><Link to={`/member/update/${row._id}`}>Edit</Link></Button>
+                                <Button variant="contained"><Link to={`/member/${row._id}/edit`}>Edit</Link></Button>
                             </div>
                         </TableCell>
                     </TableRow>
