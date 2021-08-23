@@ -17,7 +17,7 @@ function RegisterPage() {
         designation: '',
         totalExperience: '',
         totalPoints: '',
-        // updatedBy: '',
+        updatedBy: '',
         _createdBy: ''
     });
 
@@ -36,7 +36,6 @@ function RegisterPage() {
     const registering = useSelector(state => state.registration.registering);
     const dispatch = useDispatch();
     const { setValue } = useForm();
-    // const { register, handleSubmit, reset, setValue, getValues, errors, formState } = useForm();
 
     function handleChange(e) {
         setMember(member => ({ ...member, [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value }));
@@ -56,7 +55,6 @@ function RegisterPage() {
     useEffect(() => {
         if (!isAddMode) {
             // get member and set form fields
-            // dispatch(memberActions.getMemberById(id));
             memberService.getMemberById(id).then(member => {
                 const fields = ['_id', 'name', 'copName', 'email', 'designation', 'createdBy',
                                 'updatedBy', 'totalExperience', 'totalPoints'];
@@ -120,20 +118,20 @@ function RegisterPage() {
                         <div className="invalid-feedback">Designation is required</div>
                     }
                 </div>
-                <div className="form-group">
+                {member && isAddMode && <div className="form-group">
                     <label>Created by</label>
                     <input type="text" name="_createdBy" value={member._createdBy} onChange={handleChange} className={'form-control' + (submitted && !member._createdBy ? ' is-invalid' : '')} />
                     {submitted && !member._createdBy &&
                         <div className="invalid-feedback">Created by is required</div>
                     }
-                </div>
-                {/* <div className="form-group">
+                </div>}
+                {member && !isAddMode && <div className="form-group">
                     <label>Updated by</label>
                     <input type="text" name="updatedBy" value={member.updatedBy} onChange={handleChange} className={'form-control' + (submitted && !member.updatedBy ? ' is-invalid' : '')} />
                     {submitted && !member.updatedBy &&
                         <div className="invalid-feedback">Updated by is required</div>
                     }
-                </div> */}
+                </div> }
                 <div className="form-group">
                     <label>Total Experience</label>
                     <input type="number" name="totalExperience" value={member.totalExperience} onChange={handleChange} className={'form-control' + (submitted && !member.totalExperience ? ' is-invalid' : '')} />
