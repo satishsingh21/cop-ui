@@ -55,15 +55,14 @@ function HomePage() {
                     <TableRow key={row._id}>
                         <TableCell align="right">{row._id}</TableCell>
                         <TableCell align="right">
-                            <Link to={`/member/${row._id}`}>Detail{row.name}</Link>
+                            <Link to={`/member/${row._id}`}>{row.name}</Link>
                         </TableCell>
                         <TableCell align="right">{row.email}</TableCell>
                         <TableCell align="right">{row.designation}</TableCell>
                         <TableCell align="right">{row.copName}</TableCell>
                         <TableCell align="right">
                             <div className={classes.root}>
-                                
-                                <Button variant="contained">Edit</Button>
+                                <Button variant="contained"><Link to={`/member/${row._id}/edit`}>Edit</Link></Button>
                             </div>
                         </TableCell>
                     </TableRow>

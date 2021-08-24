@@ -1,10 +1,14 @@
-// import React, { useState, useEffect } from 'react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
 
 import { memberActions } from '../../state/actions';
+import { memberService } from '../../services';
 
 function RegisterPage() {
+    const { id } = useParams();
+    const isAddMode = !id;
     const [member, setMember] = useState({
         _id: '',
         name: '',
@@ -13,8 +17,8 @@ function RegisterPage() {
         designation: '',
         totalExperience: '',
         totalPoints: '',
-        // updatedBy: '',
-        createdBy: ''
+        _updatedBy: '',
+        _createdBy: ''
     });
 
     const [copNames] = React.useState([
@@ -31,6 +35,7 @@ function RegisterPage() {
 
     const registering = useSelector(state => state.registration.registering);
     const dispatch = useDispatch();
+    const { setValue } = useForm();
 
     function handleChange(e) {
         setMember(member => ({ ...member, [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value }));
@@ -40,14 +45,29 @@ function RegisterPage() {
         e.preventDefault();
 
         setSubmitted(true);
-        if (member) {
+        if (member && !isAddMode) {
+            dispatch(memberActions.updateMemberById(member));
+        } else {
             dispatch(memberActions.register(member));
         }
     }
 
+    useEffect(() => {
+        if (!isAddMode) {
+            // get member and set form fields
+            memberService.getMemberById(id).then(member => {
+                const fields = ['_id', 'name', 'copName', 'email', 'designation', '_createdBy',
+                                '_updatedBy', 'totalExperience', 'totalPoints'];
+                fields.forEach(field => setValue(field, member[field]));
+                setMember(member);
+            });
+        }
+    }, [dispatch, id, isAddMode, setValue]);
+
     return (
         <div className="col-lg-8 offset-lg-2">
             <h2>Register</h2>
+            {member.item && member.item._id}
             <form name="form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Employee Id</label>
@@ -98,20 +118,20 @@ function RegisterPage() {
                         <div className="invalid-feedback">Designation is required</div>
                     }
                 </div>
-                <div className="form-group">
+                {member && isAddMode && <div className="form-group">
                     <label>Created by</label>
-                    <input type="text" name="createdBy" value={member.createdBy} onChange={handleChange} className={'form-control' + (submitted && !member.createdBy ? ' is-invalid' : '')} />
-                    {submitted && !member.createdBy &&
+                    <input type="text" name="_createdBy" value={member._createdBy} onChange={handleChange} className={'form-control' + (submitted && !member._createdBy ? ' is-invalid' : '')} />
+                    {submitted && !member._createdBy &&
                         <div className="invalid-feedback">Created by is required</div>
                     }
-                </div>
-                {/* <div className="form-group">
+                </div>}
+                {member && !isAddMode && <div className="form-group">
                     <label>Updated by</label>
-                    <input type="text" name="updatedBy" value={member.updatedBy} onChange={handleChange} className={'form-control' + (submitted && !member.updatedBy ? ' is-invalid' : '')} />
-                    {submitted && !member.updatedBy &&
+                    <input type="text" name="_updatedBy" value={member._updatedBy} onChange={handleChange} className={'form-control' + (submitted && !member._updatedBy ? ' is-invalid' : '')} />
+                    {submitted && !member._updatedBy &&
                         <div className="invalid-feedback">Updated by is required</div>
                     }
-                </div> */}
+                </div> }
                 <div className="form-group">
                     <label>Total Experience</label>
                     <input type="number" name="totalExperience" value={member.totalExperience} onChange={handleChange} className={'form-control' + (submitted && !member.totalExperience ? ' is-invalid' : '')} />

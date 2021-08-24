@@ -5,6 +5,7 @@ export const memberActions = {
     register,
     getAllMember,
     getMemberById,
+    updateMemberById,
 };
 
 function register(member) {
@@ -13,7 +14,7 @@ function register(member) {
 
         memberService.register(member)
             .then(
-                member => { 
+                () => { 
                     dispatch(success());
                 },
                 error => {
@@ -25,6 +26,26 @@ function register(member) {
     function request(member) { return { type: memberConstants.REGISTER_REQUEST, member } }
     function success(member) { return { type: memberConstants.REGISTER_SUCCESS, member } }
     function failure(error) { return { type: memberConstants.REGISTER_FAILURE, error } }
+}
+
+function updateMemberById(member) {
+    return dispatch => {
+        dispatch(request(member));
+
+        memberService.updateMemberById(member)
+            .then(
+                () => { 
+                    dispatch(success());
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                }
+            );
+    };
+
+    function request(member) { return { type: memberConstants.UPDATE_REQUEST, member } }
+    function success(member) { return { type: memberConstants.UPDATE_SUCCESS, member } }
+    function failure(error) { return { type: memberConstants.UPDATE_FAILURE, error } }
 }
 
 function getAllMember() {
