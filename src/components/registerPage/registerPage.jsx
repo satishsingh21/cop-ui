@@ -17,7 +17,7 @@ function RegisterPage() {
         designation: '',
         totalExperience: '',
         totalPoints: '',
-        updatedBy: '',
+        _updatedBy: '',
         _createdBy: ''
     });
 
@@ -56,8 +56,8 @@ function RegisterPage() {
         if (!isAddMode) {
             // get member and set form fields
             memberService.getMemberById(id).then(member => {
-                const fields = ['_id', 'name', 'copName', 'email', 'designation', 'createdBy',
-                                'updatedBy', 'totalExperience', 'totalPoints'];
+                const fields = ['_id', 'name', 'copName', 'email', 'designation', '_createdBy',
+                                '_updatedBy', 'totalExperience', 'totalPoints'];
                 fields.forEach(field => setValue(field, member[field]));
                 setMember(member);
             });
@@ -127,8 +127,8 @@ function RegisterPage() {
                 </div>}
                 {member && !isAddMode && <div className="form-group">
                     <label>Updated by</label>
-                    <input type="text" name="updatedBy" value={member.updatedBy} onChange={handleChange} className={'form-control' + (submitted && !member.updatedBy ? ' is-invalid' : '')} />
-                    {submitted && !member.updatedBy &&
+                    <input type="text" name="_updatedBy" value={member._updatedBy} onChange={handleChange} className={'form-control' + (submitted && !member._updatedBy ? ' is-invalid' : '')} />
+                    {submitted && !member._updatedBy &&
                         <div className="invalid-feedback">Updated by is required</div>
                     }
                 </div> }
