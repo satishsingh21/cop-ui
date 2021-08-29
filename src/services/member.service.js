@@ -4,13 +4,13 @@ export const memberService = {
     register,
     getAllMember,
     getMemberById,
-    updateMemberById
+    updateMemberById,
+    registerInBulk
 };
 
 function getAllMember() {
     const requestOptions = {
         method: 'GET',
-        // headers: authHeader()
     };
 
     return fetch(`${config.apiUrl}/members`, requestOptions).then(handleResponse);
@@ -19,7 +19,6 @@ function getAllMember() {
 function getMemberById(id) {
     const requestOptions = {
         method: 'GET',
-        // headers: authHeader()
     };
 
     return fetch(`${config.apiUrl}/members/${id}`, requestOptions).then(handleResponse);
@@ -33,6 +32,19 @@ function register(member) {
     };
 
     return fetch(`${config.apiUrl}/members`, requestOptions).then(handleResponse);
+}
+
+function registerInBulk(data) {
+    const formData = new FormData();
+    formData.append('file', data.file[0], );
+
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: formData
+    };
+
+    return fetch(`${config.apiUrl}/members/upload-csv`, requestOptions).then(handleResponse);
 }
 
 function updateMemberById(member) {
