@@ -40,7 +40,7 @@ function registerInBulk(data) {
 
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/csv' },
         body: formData
     };
 
