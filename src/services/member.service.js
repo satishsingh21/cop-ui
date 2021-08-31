@@ -36,14 +36,12 @@ function register(member) {
 
 function registerInBulk(data) {
     const formData = new FormData();
-    formData.append('file', data.file[0], );
+    formData.append('file', data.file[0] );
 
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/csv' },
         body: formData
     };
-
     return fetch(`${config.apiUrl}/members/upload-csv`, requestOptions).then(handleResponse);
 }
 
@@ -53,7 +51,6 @@ function updateMemberById(member) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(member)
     };
-
     return fetch(`${config.apiUrl}/members/${member._id}`, requestOptions).then(handleResponse);;
 }
 
@@ -64,11 +61,9 @@ function handleResponse(response) {
             if (response.status === 401) {
                 Location.reload(true);
             }
-
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
-
         return data;
     });
 }
