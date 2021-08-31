@@ -6,6 +6,7 @@ export const memberActions = {
     getAllMember,
     getMemberById,
     updateMemberById,
+    registerInBulk
 };
 
 function register(member) {
@@ -24,6 +25,26 @@ function register(member) {
     };
 
     function request(member) { return { type: memberConstants.REGISTER_REQUEST, member } }
+    function success(member) { return { type: memberConstants.REGISTER_SUCCESS, member } }
+    function failure(error) { return { type: memberConstants.REGISTER_FAILURE, error } }
+}
+
+function registerInBulk(fileData) {
+    return dispatch => {
+        dispatch(request(fileData));
+
+        memberService.registerInBulk(fileData)
+            .then(
+                () => { 
+                    dispatch(success());
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                }
+            );
+    };
+
+    function request(fileData) { return { type: memberConstants.REGISTER_REQUEST, fileData } }
     function success(member) { return { type: memberConstants.REGISTER_SUCCESS, member } }
     function failure(error) { return { type: memberConstants.REGISTER_FAILURE, error } }
 }

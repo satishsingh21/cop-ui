@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { Link } from "react-router-dom";
 
 import { memberActions } from '../../state/actions';
 import { memberService } from '../../services';
@@ -66,7 +67,9 @@ function RegisterPage() {
 
     return (
         <div className="col-lg-8 offset-lg-2">
-            <h2>Register</h2>
+            <h2>Register:
+                <span><Link to="/member/bulkregister" style={{float: "right"}}  className="btn btn-primary">Register in bulk</Link></span>
+            </h2>
             {member.item && member.item._id}
             <form name="form" onSubmit={handleSubmit}>
                 <div className="form-group">
