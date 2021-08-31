@@ -5,7 +5,10 @@ export const memberService = {
     getAllMember,
     getMemberById,
     updateMemberById,
-    registerInBulk
+    registerInBulk,
+    getMemberPointsById,
+    postMemberPointById,
+    updateMemberPointById
 };
 
 function getAllMember() {
@@ -24,6 +27,14 @@ function getMemberById(id) {
     return fetch(`${config.apiUrl}/members/${id}`, requestOptions).then(handleResponse);
 }
 
+function getMemberPointsById(id) {
+    const requestOptions = {
+        method: 'GET',
+    };
+
+    return fetch(`${config.apiUrl}/members/${id}/points`, requestOptions).then(handleResponse);
+}
+
 function register(member) {
     const requestOptions = {
         method: 'POST',
@@ -32,6 +43,26 @@ function register(member) {
     };
 
     return fetch(`${config.apiUrl}/members`, requestOptions).then(handleResponse);
+}
+
+function postMemberPointById(memberPoint) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(memberPoint)
+    };
+
+    return fetch(`${config.apiUrl}/memberPoints/${memberPoint.id}/points`, requestOptions).then(handleResponse);
+}
+
+function updateMemberPointById(member) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(member)
+    };
+
+    return fetch(`${config.apiUrl}/members/${member.id}/points`, requestOptions).then(handleResponse);
 }
 
 function registerInBulk(data) {
