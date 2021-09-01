@@ -89,12 +89,12 @@ function getMemberPointsById(id) {
 
         memberService.getMemberPointsById(id)
             .then(
-                member => dispatch(success(member)),
+                point => dispatch(success(point)),
                 error => dispatch(failure(error.toString()))
             );
     };
 
     function request() { return { type: pointConstants.GET_REQUEST } }
-    function success(member) { return { type: pointConstants.GET_SUCCESS, member } }
+    function success(point) { return { type: pointConstants.GET_SUCCESS, point } }
     function failure(error) { return { type: pointConstants.GET_FAILURE, error } }
 }
