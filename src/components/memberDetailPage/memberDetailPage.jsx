@@ -56,7 +56,7 @@ function MemberDetailPage() {
             </ul>
 
             <div> Point history:
-                <span><Link to="/member/register" style={{float: "right"}}  className="btn btn-primary">Add new member</Link></span>
+                <span><Link to="/member/point" style={{float: "right"}}  className="btn btn-primary">Add points</Link></span>
             </div>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
