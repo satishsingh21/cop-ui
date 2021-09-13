@@ -7,11 +7,11 @@ export const pointActions = {
     updateMemberPointById
 };
 
-function postMemberPointById(member) {
+function postMemberPointById(point, id) {
     return dispatch => {
-        dispatch(request(member));
+        dispatch(request(point));
 
-        memberService.postMemberPointById(member)
+        memberService.postMemberPointById(point, id)
             .then(
                 () => { 
                     dispatch(success());
@@ -22,8 +22,8 @@ function postMemberPointById(member) {
             );
     };
 
-    function request(member) { return { type: pointConstants.REGISTER_REQUEST, member } }
-    function success(member) { return { type: pointConstants.REGISTER_SUCCESS, member } }
+    function request(point) { return { type: pointConstants.REGISTER_REQUEST, point } }
+    function success(point) { return { type: pointConstants.REGISTER_SUCCESS, point } }
     function failure(error) { return { type: pointConstants.REGISTER_FAILURE, error } }
 }
 

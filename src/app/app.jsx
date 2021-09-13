@@ -18,8 +18,8 @@ function App() {
                             <Switch>
                                 <Route exact path="/" component={HomePage} />
                                 <Route exact path="/member/register" component={RegisterPage} />
-                                <Route exact path="/member/point" component={PointPage} />
-                                <Route exact path="/member/pointbulkregister" component={AddPointInBulkPage} />
+                                <Route exact path="/member/:id/point/:mode" component={PointPage} />
+                                <Route exact path="/member/:id/pointbulkregister" component={AddPointInBulkPage} />
                                 <Route exact path="/member/bulkregister" component={RegisterInBulkPage} />
                                 <Route exact path="/member/:id" component={MemberDetailPage} />
                                 <Route exact path="/member/:id/edit" component={RegisterPage} />
