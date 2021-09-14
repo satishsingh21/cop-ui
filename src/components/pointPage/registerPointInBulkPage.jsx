@@ -4,12 +4,12 @@ import { useForm } from 'react-hook-form';
 
 import { memberActions } from '../../state/actions';
 
-function AddPointInBulkPage() {
+function RegisterPointInBulkPage() {
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
 
     const onSubmit = (data) => {
-        dispatch(memberActions.registerInBulk(data));
+        dispatch(memberActions.registerPointInBulk(data));
     }
 
     return (
@@ -27,4 +27,4 @@ function AddPointInBulkPage() {
     );
 }
 
-export { AddPointInBulkPage };
+export { RegisterPointInBulkPage };

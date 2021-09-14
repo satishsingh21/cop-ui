@@ -68,7 +68,7 @@ function PointPage() {
     return (
         <div className="col-lg-8 offset-lg-2">
             <h2>Add Point:
-                <span><Link to="/point/pointbulkregister" style={{float: "right"}}  className="btn btn-primary">Add Point in bulk</Link></span>
+                <span><Link to={`/member/${id}/pointbulkregister`} style={{float: "right"}}  className="btn btn-primary">Add Point in bulk</Link></span>
             </h2>
             {point.item && point.item.id}
             <form name="form" onSubmit={handleSubmit}>

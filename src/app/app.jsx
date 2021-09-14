@@ -4,7 +4,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { history } from '../helpers/history';
 import { HomePage } from '../components/homePage';
 import { RegisterPage, RegisterInBulkPage } from '../components/registerPage';
-import { PointPage, AddPointInBulkPage } from '../components/pointPage';
+import { PointPage, RegisterPointInBulkPage } from '../components/pointPage';
 import { MemberDetailPage } from '../components/memberDetailPage';
 import { ButtonAppBar } from '../components/navbarPage';
 
@@ -19,7 +19,7 @@ function App() {
                                 <Route exact path="/" component={HomePage} />
                                 <Route exact path="/member/register" component={RegisterPage} />
                                 <Route exact path="/member/:id/point/:mode" component={PointPage} />
-                                <Route exact path="/member/:id/pointbulkregister" component={AddPointInBulkPage} />
+                                <Route exact path="/member/:id/pointbulkregister" component={RegisterPointInBulkPage} />
                                 <Route exact path="/member/bulkregister" component={RegisterInBulkPage} />
                                 <Route exact path="/member/:id" component={MemberDetailPage} />
                                 <Route exact path="/member/:id/edit" component={RegisterPage} />
