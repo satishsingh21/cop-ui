@@ -6,6 +6,7 @@ export const memberService = {
     getMemberById,
     updateMemberById,
     registerInBulk,
+    registerPointInBulk,
     getMemberPointsById,
     postMemberPointById,
     updateMemberPointById
@@ -45,14 +46,14 @@ function register(member) {
     return fetch(`${config.apiUrl}/members`, requestOptions).then(handleResponse);
 }
 
-function postMemberPointById(memberPoint) {
+function postMemberPointById(memberPoint, id) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(memberPoint)
     };
 
-    return fetch(`${config.apiUrl}/memberPoints/${memberPoint.id}/points`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/members/${id}/points`, requestOptions).then(handleResponse);
 }
 
 function updateMemberPointById(member) {
@@ -74,6 +75,17 @@ function registerInBulk(data) {
         body: formData
     };
     return fetch(`${config.apiUrl}/members/upload-csv`, requestOptions).then(handleResponse);
+}
+
+function registerPointInBulk(data) {
+    const formData = new FormData();
+    formData.append('file', data.file[0] );
+
+    const requestOptions = {
+        method: 'POST',
+        body: formData
+    };
+    return fetch(`${config.apiUrl}/points/upload-csv`, requestOptions).then(handleResponse);
 }
 
 function updateMemberById(member) {

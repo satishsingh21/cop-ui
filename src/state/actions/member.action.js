@@ -1,4 +1,4 @@
-import { memberConstants } from '../../constants';
+import { memberConstants, pointConstants } from '../../constants';
 import { memberService } from '../../services';
 
 export const memberActions = {
@@ -6,7 +6,8 @@ export const memberActions = {
     getAllMember,
     getMemberById,
     updateMemberById,
-    registerInBulk
+    registerInBulk,
+    registerPointInBulk
 };
 
 function register(member) {
@@ -47,6 +48,26 @@ function registerInBulk(fileData) {
     function request(fileData) { return { type: memberConstants.REGISTER_REQUEST, fileData } }
     function success(member) { return { type: memberConstants.REGISTER_SUCCESS, member } }
     function failure(error) { return { type: memberConstants.REGISTER_FAILURE, error } }
+}
+
+function registerPointInBulk(fileData) {
+    return dispatch => {
+        dispatch(request(fileData));
+
+        memberService.registerPointInBulk(fileData)
+            .then(
+                () => { 
+                    dispatch(success());
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                }
+            );
+    };
+
+    function request(fileData) { return { type: pointConstants.REGISTER_REQUEST, fileData } }
+    function success(point) { return { type: pointConstants.REGISTER_SUCCESS, point } }
+    function failure(error) { return { type: pointConstants.REGISTER_FAILURE, error } }
 }
 
 function updateMemberById(member) {
